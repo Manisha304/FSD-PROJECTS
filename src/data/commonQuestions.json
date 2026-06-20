@@ -1,0 +1,87 @@
+{
+  "greetings": [
+    {
+      "keywords": ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy", "greetings", "what's up", "sup", "namaste", "welcome"],
+      "response": "Hello! Welcome to FinTech AI Assistant. I'm here to help you with Savings, Credit, Insurance, Pension, or Social Security services. What would you like to know?"
+    }
+  ],
+  "thanks": [
+    {
+      "keywords": ["thanks", "thank you", "thankyou", "thank u", "thx", "appreciate it", "thanks a lot", "thank you so much", "appreciated", "thanks for the help"],
+      "response": "You're welcome! Happy to assist. Feel free to ask if you need help with any of our FinTech services."
+    }
+  ],
+  "commonFAQ": [
+    {
+      "id": "what is this app",
+      "keywords": ["what is this app", "what does this app do", "what can i do here", "what services do you offer", "what is fintech", "what are you"],
+      "response": "FinTech is a comprehensive financial services platform offering Savings products (FD, RD, Goal-Based Investments), Credit solutions (Personal, Home, Education, Business loans), Insurance plans (Life, Health, Vehicle, Term), Pension schemes (NPS, APY, PM-SYM), and Social Security programs (E-SHRAM, PM Kisan, Labour Welfare, Scholarships)."
+    },
+    {
+      "id": "how to start",
+      "keywords": ["how do i start", "how to begin", "where do i start", "first step", "get started", "how to apply"],
+      "response": "To get started: 1) Navigate to Services from the menu 2) Choose a category (Savings, Credit, Insurance, Pension, or Social Security) 3) Select a specific scheme 4) Fill in your details 5) Submit the form. You can track progress in Submissions."
+    },
+    {
+      "id": "how long approval",
+      "keywords": ["how long does it take", "approval time", "how long approval", "processing time", "how many days", "when will i know"],
+      "response": "Processing typically takes 5-10 business days depending on document verification. You can track real-time status in the Submissions section of your dashboard."
+    },
+    {
+      "id": "is it safe",
+      "keywords": ["is it safe", "is my data secure", "security", "privacy", "is it trustworthy", "safe to use", "confidential"],
+      "response": "Yes, FinTech uses industry-standard encryption and security protocols to protect your personal and financial information. All data is securely stored and processed."
+    },
+    {
+      "id": "cost charges",
+      "keywords": ["is there a cost", "do you charge", "fees", "charges", "how much does it cost", "free service", "any charges"],
+      "response": "Most services are free to apply. Some specific products may have nominal processing fees which vary. Check individual scheme details for exact charges."
+    },
+    {
+      "id": "track application",
+      "keywords": ["how to track", "where is my application", "track my status", "check status", "application tracking", "application progress"],
+      "response": "Go to Submissions section in the bottom menu to track all your applications. Each shows current status: Submitted, Agent Review, Documents Pending, Admin Review, Approved, or Completed."
+    },
+    {
+      "id": "need documents",
+      "keywords": ["what documents do i need", "documents required", "documents list", "what to submit", "upload documents"],
+      "response": "Common documents: Aadhaar Card, PAN Card, Passport photo, Bank statements. Specific requirements vary by service. Document list appears when you start applying."
+    },
+    {
+      "id": "change information",
+      "keywords": ["can i change", "edit profile", "update details", "modify information", "wrong information", "correct mistake"],
+      "response": "You can update personal details in the Profile section before submitting. After submission, contact admin team via Contact page for modifications."
+    },
+    {
+      "id": "not approved",
+      "keywords": ["rejected", "denied", "not approved", "application rejected", "why rejected", "what to do if rejected"],
+      "response": "If rejected, check the Submissions section for reasons. Most common reasons: insufficient income, credit score, or incomplete documents. Contact admin team for appeal or reapplication assistance."
+    },
+    {
+      "id": "cancel application",
+      "keywords": ["cancel application", "withdraw application", "delete application", "remove application", "how to cancel"],
+      "response": "You can delete submitted applications from the Submissions section. Contact admin team if you need help with withdrawal after approval stage."
+    },
+    {
+      "id": "password reset",
+      "keywords": ["forgot password", "reset password", "change password", "password help", "cannot login", "login issue"],
+      "response": "Use the password reset option on the login page. Check your registered email for reset link. If issues persist, contact admin support."
+    },
+    {
+      "id": "contact support",
+      "keywords": ["contact support", "need help", "customer service", "talk to someone", "speak to agent", "technical issue"],
+      "response": "Visit the Contact page from bottom menu to reach our support team. For urgent issues, fill the support form and admin will respond within 24 hours."
+    },
+    {
+      "id": "multiple applications",
+      "keywords": ["can i apply multiple", "apply for multiple", "how many applications", "multiple services", "apply twice"],
+      "response": "Yes! You can apply for multiple schemes and services. Track all applications in the Submissions section."
+    },
+    {
+      "id": "best service me",
+      "keywords": ["which is best for me", "what should i apply", "which service suits me", "right service for me", "recommend service"],
+      "response": "Choice depends on your financial goals: Savings for income protection, Credit for borrowing needs, Insurance for protection, Pension for retirement, Social Security for government benefits. Share your needs and I can recommend!"
+    }
+  ]
+}  
+

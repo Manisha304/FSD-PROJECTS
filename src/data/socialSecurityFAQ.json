@@ -1,0 +1,67 @@
+{
+  "serviceId": "social_security",
+  "categoryName": "Social Security Services",
+  "questions": [
+    {
+      "id": "what is eshram",
+      "keywords": ["e shram", "eshram", "worker registration", "eshram registration", "unorganized worker"],
+      "response": "E-SHRAM: National database registration for unorganized workers. Provides benefits and portability. Required: Name, Mobile, Email, DOB, Gender, City, State, Employment details, Occupation, Work experience, Worker category, Scheme type, Bank account, IFSC, Address, Pincode, NCO code, Skill certificate, Blood group, Bank link status. One-time registration, benefits for life."
+    },
+    {
+      "id": "what is pm kisan",
+      "keywords": ["pm kisan", "kisan samman nidhi", "farmer support", "agricultural support", "crop support"],
+      "response": "PM Kisan Samman Nidhi: Direct cash transfer to farmers. ₹6,000/year (₹2,000 quarterly) support. Required: Name, Mobile, Email, DOB, Gender, City, State, Address, Pincode, Land size, Primary crop, Bank account, IFSC, Aadhaar linked with bank. For farmers with land. Eligibility: Own cultivable land."
+    },
+    {
+      "id": "what is labour welfare",
+      "keywords": ["labour welfare", "labour scheme", "worker scheme", "worker benefits", "labour benefits"],
+      "response": "Labour Welfare Schemes: Government support for workers. Coverage includes accident, disability, pension, maternity benefits. Required: Name, Mobile, Email, DOB, Gender, City, State, Employment details, Occupation, Experience, Worker category, Scheme type, Bank account, IFSC, Address, Pincode, Labour category, Union registration, Years in profession, Monthly wage. Protects worker rights and livelihoods."
+    },
+    {
+      "id": "what is scholarship",
+      "keywords": ["scholarship", "scholarship scheme", "education support", "student scholarship", "study aid"],
+      "response": "Scholarship Schemes: Financial aid for education. Covers tuition, books, living costs. Required: Name, Mobile, Email, DOB, Gender, City, State, Address, Pincode, Education level, Institution name, Course name, Annual family income, Previous marks, Category (general/SC/ST), Bank account, IFSC. Merit and need-based scholarships available."
+    },
+    {
+      "id": "eshram benefits",
+      "keywords": ["eshram benefits", "e shram benefit", "what do i get eshram", "eshram coverage"],
+      "response": "E-SHRAM benefits: Accident insurance coverage (₹2 lakh), workplace portability of benefits, easier access to govt schemes, labor compliance benefits, emergency support. Free registration with lifetime benefits for registered workers."
+    },
+    {
+      "id": "pm kisan eligibility",
+      "keywords": ["pm kisan eligibility", "who can apply pm kisan", "farmer requirements", "kisan eligibility"],
+      "response": "PM Kisan eligibility: Own agricultural land, Indian farmer, not receiving other govt pensions, not salaried govt employee, not high-income earner. Marginal and small farmers prioritized. Check land ownership and Aadhaar link status."
+    },
+    {
+      "id": "eshram registration process",
+      "keywords": ["how to register eshram", "eshram registration process", "apply eshram", "eshram how"],
+      "response": "E-SHRAM registration: Visit CSC (Common Service Center) or apply online at eshram.gov.in. Provide personal/employment details, occupation, bank account. One-time process. Get ESHRAM ID for tracking benefits. Free, open to all unorganized workers."
+    },
+    {
+      "id": "pm kisan bank linking",
+      "keywords": ["pm kisan bank link", "link bank aadhaar", "bank account link", "aadhaar link"],
+      "response": "PM Kisan requires bank account linked with Aadhaar for direct transfer. Link through your bank or UIDAI portal. Without linking, cannot receive benefits. Update details at uidai.gov.in or bank."
+    },
+    {
+      "id": "scholarship application process",
+      "keywords": ["scholarship application", "how to apply scholarship", "apply for scholarship", "scholarship form"],
+      "response": "Scholarship application: Visit Services > Social Security > Scholarship. Fill education details, income proof, marks. Upload documents (Aadhaar, PAN, passport, certificates). Assess merit & need. Usually decides within 2-3 months."
+    },
+    {
+      "id": "labour welfare coverage",
+      "keywords": ["labour welfare coverage", "what is covered", "labour scheme coverage", "worker protection"],
+      "response": "Labour Welfare covers: Workplace accident insurance (₹5-10 lakh), disability benefits, maternity allowance, death benefit, pension contribution, medical insurance. Protections vary by scheme and worker category."
+    },
+    {
+      "id": "check pm kisan status",
+      "keywords": ["check pm kisan status", "track pm kisan", "kisan payment status", "when will i get"],
+      "response": "Check PM Kisan status: Visit pmkisan.gov.in, enter Aadhaar or account number. Or visit bank/CSC. Check Submissions section here for FinTech application tracking. Payments typically monthly/quarterly."
+    },
+    {
+      "id": "multiple schemes apply",
+      "keywords": ["apply multiple schemes", "can i apply multiple", "multiple benefits", "overlap schemes"],
+      "response": "Can apply multiple schemes as long as you meet eligibility. Some schemes have restrictions: can't receive multiple similar pensions, can't double-dip subsidies. E-SHRAM + PM Kisan can combine if both eligible. Check scheme terms."
+    }
+  ]
+}
+

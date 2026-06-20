@@ -98,6 +98,13 @@ export default function DynamicForm() {
                         </option>
                       ))}
                     </select>
+                  ) : f.t === 'textarea' ? (
+                    <textarea
+                      name={f.n}
+                      required
+                      className="input-field min-h-[120px] resize-none"
+                      onChange={handleChange}
+                    />
                   ) : (
                     <input
                       type={f.t}

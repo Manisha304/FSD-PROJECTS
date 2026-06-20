@@ -1,0 +1,67 @@
+{
+  "serviceId": "insurance",
+  "categoryName": "Insurance Services",
+  "questions": [
+    {
+      "id": "what is life insurance",
+      "keywords": ["life insurance", "term insurance", "what is life insurance", "insurance policy"],
+      "response": "Life Insurance provides financial protection for your family. Term Insurance: Pure protection, low cost. Required: Name, Mobile, Email, DOB, Gender, City, State, Employment details, Income, Coverage amount, Family size, Health details, Address, Pincode, Policy term, Nominee details. Apply via Services > Insurance > Life/Term Insurance."
+    },
+    {
+      "id": "health insurance coverage",
+      "keywords": ["health insurance", "medical insurance", "what is health insurance", "hospital cover"],
+      "response": "Health Insurance covers medical expenses from hospitalization, surgeries, medicines. Required: Personal info, Health info (pre-existing diseases, smoker status), Coverage amount, Family size, Policy type, Sum assured, Cashless network preference. Apply via Services > Insurance > Health Insurance."
+    },
+    {
+      "id": "vehicle insurance car",
+      "keywords": ["vehicle insurance", "car insurance", "bike insurance", "two wheeler", "motor insurance"],
+      "response": "Vehicle Insurance: Third-party (legal requirement) or Comprehensive (full coverage). Required: Personal info, Address, Insurance type, Vehicle details (make, model, year), Registration number, Insured value, Existing policy info. Apply via Services > Insurance > Vehicle Insurance."
+    },
+    {
+      "id": "insurance premium cost",
+      "keywords": ["insurance premium", "insurance cost", "how much insurance", "premium amount", "affordable insurance"],
+      "response": "Premiums vary by: Coverage type, age, health, sum assured. Life: ₹20-100/month for term. Health: ₹500-5000/month. Vehicle: ₹2000-8000/year. Use premium calculator or contact for quotes."
+    },
+    {
+      "id": "sum assured meaning",
+      "keywords": ["sum assured", "coverage amount", "policy amount", "how much coverage"],
+      "response": "Sum Assured is maximum amount insurance pays. Choose based on your needs: Life insurance = 5-10x annual income, Health = 5-10 lakh, Vehicle = vehicle value. Higher coverage = higher premium."
+    },
+    {
+      "id": "no claim bonus",
+      "keywords": ["no claim bonus", "ncb", "claim free", "bonus discount", "renewal bonus"],
+      "response": "No Claim Bonus (NCB): Discount if no claims made. Typically 5-50% discount on renewal depending on years claim-free. Builds progressively each year."
+    },
+    {
+      "id": "claim process",
+      "keywords": ["how to claim", "file claim", "insurance claim", "claim submission", "claim process"],
+      "response": "Claim process: 1) Notify insurer immediately 2) Submit documents 3) Insurer investigates 4) Approval/denial 5) Payment. Most claims settled within 7-30 days. Track in Submissions section."
+    },
+    {
+      "id": "pre existing diseases",
+      "keywords": ["pre existing diseases", "existing conditions", "health conditions", "chronic disease", "diabetes"],
+      "response": "Pre-existing diseases declared at policy start. Some policies cover immediately, others after waiting period (6-12 months). Disclose all conditions for smooth claims."
+    },
+    {
+      "id": "nominee insurance",
+      "keywords": ["nominee insurance", "beneficiary", "who gets insurance", "inherit insurance"],
+      "response": "Nominee receives insurance payout if you pass away. Must provide Nominee Name, Relationship, and contact. Can update nominee anytime before claim."
+    },
+    {
+      "id": "policy renewal",
+      "keywords": ["renew policy", "policy renewal", "renew insurance", "expiry date", "policy extension"],
+      "response": "Renew before expiry date to maintain continuous coverage. Renewal forms sent to registered email. Can renew online. New policies require full documentation; renewals simpler."
+    },
+    {
+      "id": "cashless network",
+      "keywords": ["cashless facility", "cashless network", "cashless hospital", "treatment without payment"],
+      "response": "Cashless facility means paying hospital directly during treatment - no out-of-pocket payment. Check hospital network availability before buying health policy."
+    },
+    {
+      "id": "insurance vs investment",
+      "keywords": ["insurance vs investment", "insurance for protection", "insurance return"],
+      "response": "Insurance = Risk protection (claim if event happens). Investment = Growth (profit if market performs well). Insurance provides peace of mind; investments build wealth. Consider both."
+    }
+  ]
+}
+

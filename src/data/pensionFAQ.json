@@ -1,0 +1,67 @@
+{
+  "serviceId": "pension",
+  "categoryName": "Pension Services",
+  "questions": [
+    {
+      "id": "what is nps",
+      "keywords": ["nps", "national pension system", "what is nps", "retirement plan"],
+      "response": "National Pension System (NPS): Government-backed retirement savings. You contribute, build corpus, get monthly pension after retirement. Required: Name, Mobile, Email, DOB, Gender, City, State, Employment details, Income, Desired pension, Current/retirement age, Existing pension, Address, Pincode, PRAN if registered, Contribution, Investment pattern, Asset allocation. Apply via Services > Pension."
+    },
+    {
+      "id": "what is apy",
+      "keywords": ["apy", "atal pension yojana", "atal pension", "social security pension"],
+      "response": "Atal Pension Yojana (APY): Government scheme for unorganized workers. Guarantees fixed monthly pension after 60. Required: Name, Mobile, Email, DOB, Gender, City, State, Desired pension (₹1000-5000), Current/retirement age, Existing pension, Address, Pincode, Savings bank account, IFSC, Nominee details. Simple, low-cost, secure."
+    },
+    {
+      "id": "what is pmsym",
+      "keywords": ["pm sym", "pradhan mantri shram yogi", "shram yojana", "worker pension"],
+      "response": "PM-SYM (Pradhan Mantri Shram Yogi Maandhan): For workers earning ₹15,000/month or less. Government contributes 50% pension contributions. Required: Personal info, Employment details, Income, Desired pension, Age, Existing pension, Address, Pincode, Average monthly income, CSC ID if any, Spouse details (joint benefit), Nominee. Apply via Services > Pension > PM-SYM."
+    },
+    {
+      "id": "senior citizen pension scheme",
+      "keywords": ["senior citizen pension", "old age pension", "senior pension", "elderly pension"],
+      "response": "Senior Citizen Pension: For retirees 60+. Guarantees fixed monthly income. Required: Name, Mobile, Email, DOB, Gender, City, State, Desired pension, Current age, Retirement age, Existing pension, Address, Pincode, Age proof, Bank account, IFSC, Other pension info, Nominee. Ensures post-retirement security."
+    },
+    {
+      "id": "pension vs savings",
+      "keywords": ["pension vs savings", "difference pension savings", "which is better", "pension advantage"],
+      "response": "Pension = Lifetime guaranteed income (even if funds run out), long-term, lower risk. Savings = Own funds, higher flexibility, higher returns possible, ends when funds finish. Pension ideal for security; savings for growth."
+    },
+    {
+      "id": "contribution amount",
+      "keywords": ["how much contribute", "contribution amount", "monthly contribution", "how much invest"],
+      "response": "Contribution varies: NPS flexible (₹500-min to ₹2.5 lakh/year), APY ₹55-291/month (age 18-40), PM-SYM ₹55-291/month, Senior Citizen depends on desired pension. Use calculators to determine optimal contribution."
+    },
+    {
+      "id": "government contribution",
+      "keywords": ["government contribution", "govt help", "government support", "subsidy"],
+      "response": "Government matches: APY 50% contribution (for enrolled workers), PM-SYM 50% contribution (for eligible workers), Senior Citizen Pension some subsidies available. Check eligibility for schemes offering government co-contribution."
+    },
+    {
+      "id": "withdrawal pension",
+      "keywords": ["withdraw pension", "draw from pension", "get money pension", "pension withdrawal"],
+      "response": "Typically at 60 (NPS), 60 (APY), 60 (PM-SYM), or immediately (Senior Citizen). Can take partial withdrawal after 7 years (NPS). Get monthly pension or lump sum options depending on scheme."
+    },
+    {
+      "id": "pension amount calculation",
+      "keywords": ["pension calculation", "how much pension", "estimated pension", "monthly pension amount"],
+      "response": "Calculated by: (Total corpus × Annuity rate) ÷ 12 months. Higher contributions and longer tenure = higher pension. Use Pension Calculator (Services section) for exact estimate based on your details."
+    },
+    {
+      "id": "switch investment nps",
+      "keywords": ["switch investment", "change fund nps", "asset allocation change", "rebalance portfolio"],
+      "response": "NPS allows switching between investment options. Can change asset allocation (equity, debt, government securities) based on risk profile. Limited switches/year; some charges may apply."
+    },
+    {
+      "id": "who can apply pension",
+      "keywords": ["pension eligibility", "who can apply", "age requirement", "requirements pension"],
+      "response": "Age varies: NPS (18-60), APY (18-40), PM-SYM (18-50), Senior Citizen Pension (60+). Employment type varies. All require Indian residency and valid ID. Check specific scheme eligibility."
+    },
+    {
+      "id": "tax benefit pension",
+      "keywords": ["tax benefit pension", "tax saving pension", "section 80c", "tax deduction"],
+      "response": "NPS contribution qualifies for tax deduction under 80C (up to ₹1.5 lakh), plus additional ₹50,000 under 80CCD(1B). Tax-efficient retirement planning. Additional tax benefits on pension received."
+    }
+  ]
+}
+

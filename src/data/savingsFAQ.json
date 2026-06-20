@@ -1,0 +1,57 @@
+{
+  "serviceId": "savings",
+  "categoryName": "Savings Services",
+  "questions": [
+    {
+      "id": "what is fd",
+      "keywords": ["fixed deposit", "fd", "what is fd", "how fd works"],
+      "response": "Fixed Deposit (FD) is a safe investment where you deposit money for a fixed period at guaranteed interest. FD & RD Deposits require: Full Name, Mobile, Email, DOB, Gender, City, State, Address, Pincode, Deposit Amount, Tenure, Interest Payout, Bank Account, and IFSC Code."
+    },
+    {
+      "id": "what is rd",
+      "keywords": ["recurring deposit", "rd", "what is rd", "rd scheme"],
+      "response": "Recurring Deposit (RD) lets you invest fixed amounts regularly. Perfect for savings discipline. Same requirements as FD. Apply via Services > Savings Services > FD & RD Deposits."
+    },
+    {
+      "id": "scss eligibility",
+      "keywords": ["scss", "senior citizen savings", "senior citizen", "60 plus", "age requirement"],
+      "response": "Senior Citizen Savings Scheme (SCSS) is for ages 60+. Required: Full Name, Mobile, Email, DOB, Gender, City, State, Address, Pincode, Deposit Amount, Tenure, Bank Account, IFSC, Nominee Name, Nominee Relationship, and Age proof."
+    },
+    {
+      "id": "goal based how",
+      "keywords": ["goal based investment", "goal investment", "how goal works", "investment goals"],
+      "response": "Goal Based Investments help save for specific targets: education, retirement, home. Required: Personal info, Financial details (income, EMI, credit score), Goal name, target amount, time horizon, and risk tolerance. Apply via Services > Savings Services."
+    },
+    {
+      "id": "tax saving benefit",
+      "keywords": ["tax saving", "tax benefit", "elss", "ppf", "80c", "tax deduction"],
+      "response": "Tax Saving Investments reduce taxable income (80C deduction). Includes ELSS and PPF-like products. Required: Personal info, Financial details, Investment amount, tax regime, and PAN number. Save taxes while investing!"
+    },
+    {
+      "id": "savings interest rate",
+      "keywords": ["interest rate savings", "fd interest", "rd interest", "returns savings", "how much interest"],
+      "response": "Interest rates vary by product and tenure. Check Services section for current rates. Generally: FDs offer 5-7%, RDs 4-6%, Goal-based 6-8%, Tax-saving 6-9% depending on partner banks."
+    },
+    {
+      "id": "maturity amount",
+      "keywords": ["maturity amount", "when can i withdraw", "withdrawal", "after maturity", "how much will i get"],
+      "response": "Maturity amount = Principal + Interest earned. You receive it on maturity date. Use our Returns Calculator (Services section) to calculate exact amount for your investment."
+    },
+    {
+      "id": "nominee savings",
+      "keywords": ["nominee savings", "add nominee", "who gets money", "beneficiary", "nominee details"],
+      "response": "Nominee inherits your savings if something happens to you. Provide Nominee Name and Relationship when applying. Required for SCSS and optional for others."
+    },
+    {
+      "id": "lock in period",
+      "keywords": ["lock in period", "locked funds", "cannot withdraw", "premature withdrawal", "break deposit"],
+      "response": "Lock-in periods vary: FD usually 1-5 years, SCSS 5 years, ELSS 3 years, PPF 15 years. Early withdrawal may have penalties. Check scheme details before applying."
+    },
+    {
+      "id": "savings vs investment",
+      "keywords": ["savings vs investment", "difference savings investment", "which is better", "safer"],
+      "response": "Savings products (FD, RD) are safer with fixed returns. Goal-based investments offer growth potential. Tax-saving products combine both. Choose based on your risk tolerance and timeline."
+    }
+  ]
+}
+

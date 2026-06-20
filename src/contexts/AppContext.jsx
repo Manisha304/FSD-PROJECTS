@@ -1,5 +1,11 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { CATEGORIES } from '../data/categories.js';
+import {
+  GREETING_RESPONSE, THANKS_RESPONSE, AMBIGUOUS_RESPONSE,
+  UNRELATED_RESPONSE, CONSECUTIVE_UNRELATED_RESPONSE,
+  UNAVAILABLE_RESPONSE, CONSECUTIVE_UNRELATED_LIMIT,
+  isGreeting, isThanks, isHelpRequest, findService,
+} from '../data/chatbotKnowledge.js';
 
 const AppContext = createContext(null);
 
@@ -40,6 +46,7 @@ export function AppProvider({ children }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showPredefinedBtns, setShowPredefinedBtns] = useState(true);
   const [selectedApplication, setSelectedApplication] = useState(null);
+  const unrelatedCountRef = useRef(0);
 
   useEffect(() => { saveApps(applications); }, [applications]);
 
@@ -256,15 +263,34 @@ export function AppProvider({ children }) {
     addChatMessage(text, 'user');
     setShowPredefinedBtns(false);
     setTimeout(() => {
-      let reply = "I'm sorry, I don't understand that. You can ask about Savings, Credit, Insurance, Pension, Social Security, or type 'contact admin'.";
-      const lmsg = text.toLowerCase();
-      if (lmsg.includes('saving')) reply = 'We offer High Return FDs, RDs, SGB, ELSS, and SIPs. Navigate to Services -> Savings to apply.';
-      else if (lmsg.includes('credit') || lmsg.includes('loan')) reply = 'We offer Micro Credit, Livelihood Support, MSME, and Home/Vehicle Loans. Navigate to Services -> Credit.';
-      else if (lmsg.includes('insurance')) reply = 'We offer Life, Medical, Vehicle, and Agri Insurance. Navigate to Services -> Insurance.';
-      else if (lmsg.includes('pension')) reply = 'We offer APY, PM-SYM / PM-KMY, and NPS-Lite. Navigate to Services -> Pension.';
-      else if (lmsg.includes('social') || lmsg.includes('welfare')) reply = 'We currently implement TNUWWB, TNCWWB, and E-SHRAM schemes. Navigate to Services -> Social Security.';
-      else if (lmsg.includes('admin') || lmsg.includes('contact')) reply = "You can contact the admin team by clicking 'Contact Admin' in the top menu or the bottom bar.";
-      else if (lmsg.includes('hello') || lmsg.includes('hi')) reply = 'Hello! How can I assist you with NexaFin services today?';
+      const message = text.trim();
+      let reply;
+
+      if (isGreeting(message)) {
+        unrelatedCountRef.current = 0;
+        reply = GREETING_RESPONSE;
+      } else if (isThanks(message)) {
+        unrelatedCountRef.current = 0;
+        reply = THANKS_RESPONSE;
+      } else if (isHelpRequest(message)) {
+        unrelatedCountRef.current = 0;
+        reply = AMBIGUOUS_RESPONSE;
+      } else {
+        const matched = findService(message);
+        if (matched) {
+          unrelatedCountRef.current = 0;
+          reply = matched.response;
+        } else {
+          unrelatedCountRef.current += 1;
+          if (unrelatedCountRef.current >= CONSECUTIVE_UNRELATED_LIMIT) {
+            reply = CONSECUTIVE_UNRELATED_RESPONSE;
+            unrelatedCountRef.current = 0;
+          } else {
+            reply = UNRELATED_RESPONSE;
+          }
+        }
+      }
+
       addChatMessage(reply, 'bot');
     }, 600);
   }, [addChatMessage]);

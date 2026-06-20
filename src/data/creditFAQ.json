@@ -1,0 +1,67 @@
+{
+  "serviceId": "credit",
+  "categoryName": "Credit Services",
+  "questions": [
+    {
+      "id": "what is personal loan",
+      "keywords": ["personal loan", "what is personal loan", "personal loan how", "need money"],
+      "response": "Personal Loan is unsecured credit for any personal need. No collateral required. Required: Name, Mobile, Email, DOB, Gender, City, State, Employment Type, Company, Occupation, Experience, Income, EMI, Loans, Credit Score, Bank, Loan Amount, Tenure, Purpose, Address, Pincode. Apply via Services > Credit."
+    },
+    {
+      "id": "home loan property",
+      "keywords": ["home loan", "house loan", "property loan", "buy house", "mortgage"],
+      "response": "Home Loan for buying, building, or renovating property. Same requirements as Personal Loan plus: Property Type, Value, Age, and Location. Typically lower interest rates than personal loans. Apply via Services > Credit > Home Loan."
+    },
+    {
+      "id": "education loan details",
+      "keywords": ["education loan", "student loan", "study loan", "college loan", "course"],
+      "response": "Education Loan covers tuition, accommodation, and related costs. Lighter requirements than other loans. Need: Personal info, Income, Credit score, Course & institution details, Fees amount, Loan needed. Apply via Services > Credit > Education Loan."
+    },
+    {
+      "id": "business loan startup",
+      "keywords": ["business loan", "startup loan", "business funding", "msme loan", "small business"],
+      "response": "Business Loan for startups and existing businesses. Required: Personal info, Employment details, Income, Credit score, plus Business Name, Type, Vintage, Turnover, and GSTIN. Flexible tenure and competitive rates. Apply via Services > Credit > Business Loan."
+    },
+    {
+      "id": "credit score importance",
+      "keywords": ["credit score", "what is credit score", "how credit score", "improve credit score", "score check"],
+      "response": "Credit Score reflects loan repayment history (0-900). Higher score = better approval chances and lower interest rates. Scores 750+ are excellent, 650-750 good, below 650 may face rejection. Build score by paying bills on time."
+    },
+    {
+      "id": "emi calculation",
+      "keywords": ["emi", "monthly payment", "emi calculation", "how much emi", "total payment"],
+      "response": "EMI (Equated Monthly Installment) is your fixed monthly loan payment. Calculated as: EMI = (P × R × T) / (T - 1) where P=Principal, R=Monthly Rate, T=Total months. Use our EMI Calculator in Services for exact amount."
+    },
+    {
+      "id": "loan eligibility",
+      "keywords": ["loan eligibility", "eligible for loan", "can i get loan", "eligibility check", "loan requirements"],
+      "response": "General requirements: Age 21-60, stable income (min ₹15,000/month), good credit score (650+), Indian resident with identity proof. Some variation per loan type. Check Eligibility Checker in Services section."
+    },
+    {
+      "id": "documents for loan",
+      "keywords": ["loan documents", "what documents loan", "required documents", "submit documents"],
+      "response": "Common documents: Aadhaar, PAN, Passport photo, Salary slips (3 months), Bank statements (6 months). For Business: GST certificate, Trade license, Income tax returns. Check specific requirements when applying."
+    },
+    {
+      "id": "interest rate loan",
+      "keywords": ["loan interest rate", "interest rate", "roi loan", "rate comparison", "lowest rate"],
+      "response": "Interest rates typically: Personal 8-15%, Home 6-9%, Education 7-11%, Business 8-16%. Rates vary by credit score, tenure, and bank partner. Use Interest Rate Comparison tool to compare across banks."
+    },
+    {
+      "id": "loan processing time",
+      "keywords": ["loan approval time", "how long loan approval", "processing time", "quick approval", "instant approval"],
+      "response": "Processing: 3-7 days for approval, 1-3 days disbursement after approval. Fast-track: 24 hours possible for excellent credit scores. Track status in Submissions section."
+    },
+    {
+      "id": "early repayment",
+      "keywords": ["early repayment", "prepay loan", "pay early", "close loan early", "prepayment"],
+      "response": "Most loans allow early repayment. Some may have prepayment charges (typically 1-3%). Early repayment saves interest. Check loan terms before applying."
+    },
+    {
+      "id": "loan vs credit card",
+      "keywords": ["loan vs credit card", "difference loan credit card", "which is better"],
+      "response": "Loan: Large amount, long term, fixed EMI, lower rate. Credit Card: Smaller amount, revolving limit, flexible repayment, higher rate. Choose loan for big purchases, card for daily expenses."
+    }
+  ]
+}
+
