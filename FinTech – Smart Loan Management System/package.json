@@ -1,0 +1,38 @@
+{
+  "name": "fintech",
+  "version": "1.0.0",
+  "description": "NexaFin Agent Portal - React App",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthavyaS/FinTech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarthavyaS/FinTech/issues"
+  },
+  "homepage": "https://github.com/KarthavyaS/FinTech#readme",
+  "dependencies": {
+    "@prisma/client": "^7.8.0",
+    "framer-motion": "^12.40.0",
+    "i18next": "^26.3.1",
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "prisma": "^7.8.0",
+    "vite": "^8.0.16"
+  }
+}
