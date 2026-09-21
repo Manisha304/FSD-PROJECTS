@@ -1,0 +1,20 @@
+# ── Core vision ──────────────────────────────────────────────────────────────
+opencv-python>=4.8.0
+mediapipe>=0.10.0
+numpy>=1.24.0
+
+# ── Web dashboard ─────────────────────────────────────────────────────────────
+flask>=3.0.0
+
+# ── Alerts ────────────────────────────────────────────────────────────────────
+twilio>=8.0.0
+
+# ── Voice ─────────────────────────────────────────────────────────────────────
+SpeechRecognition>=3.10.0
+pyttsx3>=2.90
+
+# PyAudio is required by SpeechRecognition for microphone input.
+# On Windows: pip install pyaudio
+# On Linux:   sudo apt install portaudio19-dev && pip install pyaudio
+# On macOS:   brew install portaudio && pip install pyaudio
+pyaudio>=0.2.13; sys_platform == "win32"
