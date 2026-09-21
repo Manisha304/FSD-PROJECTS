@@ -41,24 +41,43 @@ export function AppProvider({ children }) {
   const [currentCategory, setCurrentCategory] = useState(null);
   const [currentScheme, setCurrentScheme] = useState(null);
   const [applications, setApplications] = useState(loadApps);
+  const [tourCompleted, setTourCompleted] = useState(() => localStorage.getItem('fintech_tour_completed') === 'true');
   const [toast, setToast] = useState({ message: '', visible: false });
   const [chatMessages, setChatMessages] = useState([]);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showPredefinedBtns, setShowPredefinedBtns] = useState(true);
   const [selectedApplication, setSelectedApplication] = useState(null);
+  const [selectedService, setSelectedService] = useState(null);
   const unrelatedCountRef = useRef(0);
 
   useEffect(() => { saveApps(applications); }, [applications]);
+
+  useEffect(() => {
+    localStorage.setItem('fintech_tour_completed', tourCompleted ? 'true' : 'false');
+  }, [tourCompleted]);
 
   const showToast = useCallback((message) => {
     setToast({ message, visible: true });
     setTimeout(() => setToast({ message: '', visible: false }), 2500);
   }, []);
 
+  const completeTour = useCallback(() => {
+    setTourCompleted(true);
+  }, []);
+
   const switchView = useCallback((viewId) => {
     setCurrentView(viewId);
     window.scrollTo(0, 0);
   }, []);
+
+  const openServiceDetail = useCallback((serviceId) => {
+    const category = CATEGORIES.find(c => c.id === serviceId);
+    if (category) {
+      setCurrentCategory(category);
+      setSelectedService(category);
+      switchView('serviceDetailView');
+    }
+  }, [switchView]);
 
   const openCategory = useCallback((catId) => {
     const cat = CATEGORIES.find(c => c.id === catId);
@@ -302,6 +321,8 @@ export function AppProvider({ children }) {
   const value = {
     currentView, switchView, currentCategory, setCurrentCategory,
     currentScheme, setCurrentScheme, openCategory, openSchemeForm,
+    selectedService, setSelectedService, openServiceDetail,
+    tourCompleted, completeTour,
     get submissions() { return applications; },
     applications, addSubmission, deleteSubmission,
     toast, showToast,

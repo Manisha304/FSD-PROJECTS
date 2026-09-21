@@ -5,6 +5,9 @@ import Landing from './pages/Landing.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import OnboardingTour from './pages/OnboardingTour.jsx';
+import ServiceOverview from './pages/ServiceOverview.jsx';
+import ServiceDetail from './pages/ServiceDetail.jsx';
 import SchemesDashboard from './pages/SchemesDashboard.jsx';
 import CategoryList from './pages/CategoryList.jsx';
 import DynamicForm from './pages/DynamicForm.jsx';
@@ -25,7 +28,10 @@ function AppContent() {
   if (!isLoggedIn) {
     return (
       <main className="flex-grow flex flex-col items-center px-4 py-8 w-full">
-        {currentView === 'landingView' ? <Landing /> : currentView === 'registerView' ? <Register /> : <Login />}
+        {currentView === 'landingView' && <Landing />}
+        {currentView === 'tourView' && <OnboardingTour />}
+        {currentView === 'registerView' && <Register />}
+        {currentView === 'loginView' && <Login />}
       </main>
     );
   }
@@ -34,6 +40,10 @@ function AppContent() {
     switch (currentView) {
       case 'registerView':
         return <Register />;
+      case 'serviceOverviewView':
+        return <ServiceOverview />;
+      case 'serviceDetailView':
+        return <ServiceDetail />;
       case 'categoryListView':
         return <CategoryList />;
       case 'formView':
@@ -52,12 +62,12 @@ function AppContent() {
         return <SchemesDashboard />;
       case 'profileView':
         return <Profile />;
-        case 'contactView':
-  return <Contact />;
-  case 'supportTicketView':
-  return <SupportTicket />;
-  case 'assignedAgentView':
-  return <AssignedAgent />;
+      case 'contactView':
+        return <Contact />;
+      case 'supportTicketView':
+        return <SupportTicket />;
+      case 'assignedAgentView':
+        return <AssignedAgent />;
       default:
         if (isAdmin) return <AdminDashboard />;
         if (isAgent) return <AgentDashboard />;

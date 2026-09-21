@@ -11,47 +11,628 @@ datasource db {
   provider = "postgresql"
 }
 
+// ============== ENUMS ==============
+
 enum UserRole {
   CLIENT
   AGENT
   ADMIN
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  phone     String?
-  role      UserRole @default(CLIENT)
-
-  applications Application[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum ServiceCategory {
+  CREDIT
+  SAVINGS
+  INSURANCE
+  PENSION
+  SOCIAL
 }
 
 enum ApplicationStatus {
   SUBMITTED
-  UNDER_REVIEW
+  AGENT_REVIEW
   DOCUMENTS_PENDING
-  VERIFIED
+  DOCUMENTS_VERIFIED
+  ADMIN_REVIEW
+  BANK_SELECTION
+  SENT_TO_BANK
+  UNDER_BANK_REVIEW
   APPROVED
   REJECTED
   COMPLETED
 }
 
+enum DocumentVerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum ReviewType {
+  AGENT_REVIEW
+  ADMIN_REVIEW
+  BANK_REVIEW
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  SUCCESS
+  ERROR
+}
+
+enum EligibilityStatus {
+  ELIGIBLE
+  INELIGIBLE
+  PENDING
+}
+
+enum LoanType {
+  PERSONAL_LOAN
+  HOME_LOAN
+  EDUCATION_LOAN
+  BUSINESS_LOAN
+}
+
+enum SavingsType {
+  FD_RD
+  SENIOR_CITIZEN_SAVINGS
+  GOAL_BASED_INVESTMENTS
+  TAX_SAVING_INVESTMENTS
+}
+
+enum InsuranceType {
+  LIFE_INSURANCE
+  HEALTH_INSURANCE
+  VEHICLE_INSURANCE
+  TERM_INSURANCE
+}
+
+enum PensionType {
+  NPS
+  APY
+  PM_SYM
+  SENIOR_CITIZEN_PENSION
+}
+
+enum SocialSchemeType {
+  ESHRAM
+  PM_KISAN
+  LABOUR_WELFARE
+  SCHOLARSHIP_SCHEMES
+}
+
+
+// ============== CORE MODELS ==============
+
+model User {
+  id               String   @id @default(cuid())
+  name             String
+  email            String   @unique
+  password         String
+  phone            String?
+  role             UserRole @default(CLIENT)
+  
+  // Profile Information
+  dateOfBirth      DateTime?
+  gender           String?
+  city             String?
+  state            String?
+  profilePicture   String?
+  isActive         Boolean  @default(true)
+
+  // Relations
+  applications              Application[]     @relation("UserApplications")
+  assignedApplications      Application[]     @relation("AgentAssignment")
+  documents                 Document[]
+  createdReviews            ApplicationReview[] @relation("ReviewerReviews")
+  notifications             Notification[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Service {
+  id              String   @id @default(cuid())
+  name            String
+  description     String?
+  category        ServiceCategory
+  
+  // Eligibility and Requirements
+  eligibilityRules String? // JSON format storing eligibility criteria
+  requiredDocuments String? // JSON array of required document types
+  optionalDocuments String? // JSON array of optional document types
+  
+  isActive        Boolean  @default(true)
+
+  // Relations
+  applications    Application[]
+  formSchema      FormSchema?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([name, category])
+}
+
 model Application {
-  id          String   @id @default(cuid())
+  id                String   @id @default(cuid())
+  
+  // User and Service References
+  userId            String
+  user              User @relation("UserApplications", fields: [userId], references: [id], onDelete: Cascade)
+  
+  serviceId         String
+  service           Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  // Service Category
+  serviceCategory   ServiceCategory
+  
+  // Agent and Bank Assignment
+  assignedAgentId   String?
+  assignedAgent     User? @relation("AgentAssignment", fields: [assignedAgentId], references: [id], onDelete: SetNull)
+  
+  bankPartnerId     String?
+  bankPartner       BankPartner? @relation(fields: [bankPartnerId], references: [id], onDelete: SetNull)
 
-  title       String
-  serviceType String
+  // Application Status and Data
+  status            ApplicationStatus @default(SUBMITTED)
+  formData          String? // JSON format storing all dynamic form field data
+  currentRemarks    String?
+  
+  // Eligibility and Approval Tracking
+  eligibilityStatus EligibilityStatus @default(PENDING)
+  approvalPercentage Int? @default(0) // 0-100
+  estimatedAmount   Decimal? @db.Decimal(15, 2)
 
-  status      ApplicationStatus @default(SUBMITTED)
+  // Relations - Core
+  documents         Document[]
+  reviews           ApplicationReview[]
+  eligibility       Eligibility?
+  notifications     Notification[]
+  
+  // Relations - Service Specific
+  loanData          LoanData?
+  savingsData       SavingsData?
+  insuranceData     InsuranceData?
+  pensionData       PensionData?
+  socialData        SocialData?
+  
+  // Relations - Calculations
+  loanCalculations  LoanCalculation[]
+  savingsCalculations SavingsCalculation[]
+  insuranceCalculations InsuranceCalculation[]
+  pensionCalculations PensionCalculation[]
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
 
-  userId      String
-  user        User @relation(fields: [userId], references: [id])
+// ============== CREDIT SERVICE MODELS ==============
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model LoanData {
+  id                    String   @id @default(cuid())
+  
+  applicationId         String   @unique
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  loanType              LoanType
+  loanAmount            Decimal @db.Decimal(15, 2)
+  loanTenure            Int // in months
+  purpose               String?
+  
+  // Employment Details
+  employmentType        String?
+  companyName           String?
+  occupation            String?
+  workExperience        Int? // in years
+  
+  // Financial Details
+  monthlyIncome         Decimal? @db.Decimal(15, 2)
+  existingEmi           Decimal? @db.Decimal(15, 2)
+  existingLoans         String? // JSON array
+  creditScore           Int?
+  bankName              String?
+  
+  // Loan-Specific Details (JSON for flexibility)
+  loanSpecificDetails   String? // JSON for property details, education details, business details
+  
+  // Home Loan Specific
+  propertyType          String?
+  propertyValue         Decimal? @db.Decimal(15, 2)
+  propertyAge           Int?
+  propertyLocation      String?
+  
+  // Education Loan Specific
+  courseName            String?
+  institutionName       String?
+  admissionYear         Int?
+  courseDuration        Int?
+  totalFees             Decimal? @db.Decimal(15, 2)
+  
+  // Business Loan Specific
+  businessName          String?
+  businessType          String?
+  businessVintage       Int?
+  annualTurnover        Decimal? @db.Decimal(15, 2)
+  gstin                 String?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model LoanCalculation {
+  id                String   @id @default(cuid())
+  
+  applicationId     String
+  application       Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  monthlyEmi        Decimal @db.Decimal(15, 2)
+  totalInterest     Decimal @db.Decimal(15, 2)
+  totalPayment      Decimal @db.Decimal(15, 2)
+  maxEligibleAmount Decimal @db.Decimal(15, 2)
+  interestRate      Decimal @db.Decimal(5, 2)
+  
+  // Recommendations
+  recommendedBanks  String? // JSON array
+  approvalProbability Int? // percentage
+  riskLevel         String?
+  
+  calculatedAt      DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// ============== SAVINGS SERVICE MODELS ==============
+
+model SavingsData {
+  id                    String   @id @default(cuid())
+  
+  applicationId         String   @unique
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  savingsType           SavingsType
+  depositAmount         Decimal @db.Decimal(15, 2)
+  tenure                Int // in months or years depending on type
+  interestPayout        String? // Monthly, Quarterly, Yearly, At Maturity
+  
+  // Bank Details
+  bankAccount           String?
+  ifscCode              String?
+  
+  // Nominee Information
+  nomineeName           String?
+  nomineeRelation       String?
+  
+  // Investment-Specific
+  investmentType        String? // ELSS, PPF, NSC, etc.
+  goalName              String? // Child Education, Retirement, etc.
+  targetAmount          Decimal? @db.Decimal(15, 2)
+  timeHorizon           Int? // in years
+  monthlyInvestmentCapacity Decimal? @db.Decimal(15, 2)
+  riskTolerance         String? // Low, Medium, High
+  
+  // Tax Information
+  taxRegime             String? // Old Regime, New Regime
+  panNumber             String?
+  
+  // Senior Citizen Specific
+  ageProof              Int? // age
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model SavingsCalculation {
+  id                String   @id @default(cuid())
+  
+  applicationId     String
+  application       Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  totalInvestment   Decimal @db.Decimal(15, 2)
+  maturityAmount    Decimal @db.Decimal(15, 2)
+  estimatedReturns  Decimal @db.Decimal(15, 2)
+  taxSaved          Decimal? @db.Decimal(15, 2)
+  interestEarned    Decimal @db.Decimal(15, 2)
+  
+  monthlyInvestment Decimal? @db.Decimal(15, 2)
+  
+  calculatedAt      DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// ============== INSURANCE SERVICE MODELS ==============
+
+model InsuranceData {
+  id                    String   @id @default(cuid())
+  
+  applicationId         String   @unique
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  insuranceType         InsuranceType
+  policyType            String? // Term, Whole Life, Endowment, etc.
+  sumAssured            Decimal @db.Decimal(15, 2)
+  policyTerm            Int // in years
+  
+  // Nominee Information
+  nomineeName           String?
+  nomineeRelation       String?
+  
+  // Life/Term Insurance
+  coverageAmount        Decimal? @db.Decimal(15, 2)
+  familySize            Int?
+  preExistingDiseases   String?
+  smokerStatus          String?
+  
+  // Health Insurance
+  policyTypeHealth      String? // Individual, Family Floater, Critical Illness, etc.
+  cashlessNetwork       String? // Yes/No
+  
+  // Vehicle Insurance
+  vehicleType           String? // 2-Wheeler, 4-Wheeler, Commercial
+  vehicleMake           String?
+  vehicleModel          String?
+  mfgYear               Int?
+  registrationNo        String?
+  idv                   Decimal? @db.Decimal(15, 2) // Insured Declared Value
+  existingPolicy        String? // Yes-Renew, No-New
+  insuranceTypeVehicle  String? // Third Party, Comprehensive, Own Damage
+  
+  // Premium Payment
+  premiumPaymentMode    String? // Yearly, Half-Yearly, Monthly
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model InsuranceCalculation {
+  id                String   @id @default(cuid())
+  
+  applicationId     String
+  application       Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  premiumAmount     Decimal @db.Decimal(15, 2)
+  coverageAmount    Decimal @db.Decimal(15, 2)
+  claimSettlementRatio Decimal @db.Decimal(5, 2) // percentage
+  totalCostAtMaturity Decimal? @db.Decimal(15, 2)
+  
+  calculatedAt      DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// ============== PENSION SERVICE MODELS ==============
+
+model PensionData {
+  id                    String   @id @default(cuid())
+  
+  applicationId         String   @unique
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  pensionType           PensionType
+  monthlyContribution   Decimal? @db.Decimal(15, 2)
+  
+  // NPS Specific
+  pranNumber            String?
+  investmentPattern     String? // Auto Choice, Active Choice
+  subscriberType        String? // Government, All Citizens, Corporate
+  assetAllocation       String? // Aggressive, Moderate, Conservative
+  
+  // APY Specific
+  desiredPensionAmount  Int? // Fixed options: 1000, 2000, 3000, 4000, 5000
+  
+  // PM-SYM Specific
+  monthlyIncome         Decimal? @db.Decimal(15, 2)
+  cscVleId              String?
+  spouseName            String?
+  
+  // Senior Citizen Pension
+  age                   Int?
+  existingPension       String? // No, Yes-Govt, Yes-Private
+  
+  // Nominee Information
+  nomineeName           String?
+  nomineeRelation       String?
+  
+  // Bank Details
+  bankAccount           String?
+  ifscCode              String?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model PensionCalculation {
+  id                String   @id @default(cuid())
+  
+  applicationId     String
+  application       Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  monthlyPension    Decimal @db.Decimal(15, 2)
+  totalCorpus       Decimal @db.Decimal(15, 2)
+  withdrawalAmount  Decimal? @db.Decimal(15, 2)
+  yearsOfPension    Int? // estimated
+  
+  calculatedAt      DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// ============== SOCIAL SCHEME MODELS ==============
+
+model SocialData {
+  id                    String   @id @default(cuid())
+  
+  applicationId         String   @unique
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  schemeType            SocialSchemeType
+  
+  // E-SHRAM
+  occupationCode        String?
+  skillCertificate      String?
+  bloodGroup            String?
+  bankLinked            Boolean?
+  
+  // PM Kisan
+  landSize              Decimal? @db.Decimal(10, 2) // in acres
+  cropType              String?
+  aadhaarLinked         Boolean?
+  
+  // Labour Welfare
+  labourCategory        String?
+  unionRegistration     String?
+  yearsInProfession     Int?
+  monthlyWage           Decimal? @db.Decimal(15, 2)
+  
+  // Scholarship
+  educationLevel        String?
+  institutionName       String?
+  courseName            String?
+  annualFamilyIncome    Decimal? @db.Decimal(15, 2)
+  previousYearMarks     Decimal? @db.Decimal(5, 2)
+  category              String? // General, SC, ST, OBC, EWS, Minority
+  
+  // Bank Details
+  bankAccount           String?
+  ifscCode              String?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+// ============== DOCUMENT & VERIFICATION MODELS ==============
+
+model Document {
+  id                    String   @id @default(cuid())
+  
+  applicationId         String
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  userId                String
+  user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Document Details
+  documentType          String // "Aadhar", "PAN", "Salary Slip", etc.
+  fileName              String
+  fileUrl               String
+  fileSize              Int? // in bytes
+  fileType              String // "pdf", "jpg", "doc", etc.
+  
+  // Verification
+  verificationStatus    DocumentVerificationStatus @default(PENDING)
+  rejectionReason       String?
+  verifiedAt            DateTime?
+  verifiedBy            String? // Agent/Admin ID
+  verificationNotes     String?
+
+  uploadedAt            DateTime @default(now())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Eligibility {
+  id                  String   @id @default(cuid())
+  
+  applicationId       String   @unique
+  application         Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  // Eligibility Details
+  isEligible          Boolean
+  eligibilityScore    Int // 0-100
+  eligibilityReasons  String? // JSON array of reason strings
+  rejectionReasons    String? // JSON array of reason strings (if ineligible)
+  
+  // Document Requirements
+  requiredDocuments   String? // JSON array
+  missingDocuments    String? // JSON array
+  
+  // Validity
+  checkedAt           DateTime @default(now())
+  expiryDate          DateTime?
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+// ============== REVIEW & APPROVAL MODELS ==============
+
+model ApplicationReview {
+  id                String   @id @default(cuid())
+  
+  applicationId     String
+  application       Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  reviewerId        String
+  reviewer          User @relation("ReviewerReviews", fields: [reviewerId], references: [id], onDelete: Cascade)
+  
+  // Review Details
+  reviewType        ReviewType
+  status            ReviewStatus @default(PENDING)
+  comments          String?
+  recommendedAmount Decimal? @db.Decimal(15, 2)
+  rating            Int? // 1-5 scale
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Notification {
+  id            String   @id @default(cuid())
+  
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  applicationId String?
+  application   Application? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+  
+  // Notification Content
+  title         String
+  message       String
+  type          NotificationType @default(INFO)
+  isRead        Boolean  @default(false)
+  actionUrl     String? // Link to related resource (e.g., /applications/:id)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model BankPartner {
+  id                String   @id @default(cuid())
+  
+  name              String   @unique
+  contactPerson     String?
+  email             String   @unique
+  phone             String?
+  address           String?
+  bankCode          String?
+  
+  isActive          Boolean  @default(true)
+  registeredAt      DateTime @default(now())
+  lastInteractionAt DateTime?
+
+  // Relations
+  applications      Application[]
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model FormSchema {
+  id            String   @id @default(cuid())
+  
+  serviceId     String   @unique
+  service       Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  // Form Structure
+  fieldGroups   String? // JSON array: { groupName, fields: [{ name, label, type, required, options, validation }] }
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
